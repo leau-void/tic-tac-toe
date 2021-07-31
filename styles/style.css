@@ -11,7 +11,7 @@ body {
 #game-board {
   width: 500px;
   height: 500px;
-  margin: 100px auto 0 auto;
+  margin: 50px auto 0 auto;
   background-color: black;
   display: grid;
   grid: repeat(3, 1fr) / repeat(3, 1fr);
@@ -36,10 +36,10 @@ body {
 
 form {
   width: 80%;
-  background-color: red;
+  background-color: brown;
   display: flex;
   flex-direction: column;
-  margin: 5vh auto;
+  margin: 5vh auto 0 auto;
   padding: 10px;
 }
 
@@ -52,6 +52,25 @@ form {
 
 .radio-marker:checked + .marker-label {
   border : 2px solid white;
+}
+
+.ai-label {
+  color: white;
+  font-size: 1rem;
+  padding: 5px;
+  border: 2px solid transparent;
+}
+
+.radio-ai:checked + .ai-label {
+  border : 2px solid white;
+}
+
+#ai-form-label {
+  display: initial;
+}
+
+#ai-form-label.visually-hidden {
+  display: none;
 }
 
 .visually-hidden {

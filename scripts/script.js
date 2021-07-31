@@ -13,16 +13,17 @@ const gameBoard = (function () {
 })();
 
 
-const PlayerFactory = (name, marker, isHuman) => {
+const PlayerFactory = (name, marker, isHuman, aiLevel) => {
   const playerProto = {
     pick() {
-      if (event.target.textContent) return;
+      if (event.target.textContent) return false;
 
       gameBoard.gameState[event.target.dataset.position] = this.marker;
       event.target.textContent = this.marker;
       this.picks.push(Number(event.target.dataset.position));
       
       this.roundsPlayed++
+      return true;
     },
     
     resetPlayer() {
@@ -31,7 +32,21 @@ const PlayerFactory = (name, marker, isHuman) => {
     },
     
     pickCPU() {
-      console.log("cpu")
+      //  console.log(aiLevel)
+     // if (this.aiLevel == "easy") {
+
+        let pickFunc = () => Math.floor(Math.random() * 9)
+      
+
+        let currentPick = pickFunc();
+
+        while(gameBoard.gameState[currentPick]) {
+          currentPick = pickFunc();
+        }
+        document.querySelector(`[data-position="${currentPick}"]`).click();
+
+     // }
+      
     },
     
     getPicks() {
@@ -42,7 +57,7 @@ const PlayerFactory = (name, marker, isHuman) => {
   this.roundsPlayed = 0;
   this.picks = [];
 
-  return Object.assign (Object.create(playerProto), {name, marker, isHuman, roundsPlayed, picks})
+  return Object.assign (Object.create(playerProto), {name, marker, isHuman, roundsPlayed, picks, aiLevel})
 }
 
 
@@ -52,22 +67,35 @@ const game = (function() {
   const playerTwo = PlayerFactory("Two", "O", true);
   
   
-(function() {
-  const form = document.forms[0]
+  (function() {
+    const form = document.forms[0]
   
   
-  const getForm = function() {
-  const whichPlayer = (form.marker.value === "X") ? playerOne : playerTwo;
-  const otherPlayer = (whichPlayer == playerOne) ? playerTwo : playerOne;
+    const getForm = function() {
+    const whichPlayer = (form.marker.value === "X") ? playerOne : playerTwo;
+    const otherPlayer = (whichPlayer == playerOne) ? playerTwo : playerOne;
 
-  whichPlayer.name = form.name1.value;
-  otherPlayer.name = form.name2.value;
+    whichPlayer.name = form.name1.value;
+    otherPlayer.name = form.name2.value;
   
-  otherPlayer.isHuman = JSON.parse(form.humanorai.value);
+    otherPlayer.isHuman = JSON.parse(form.humanorai.value);
+    if (!otherPlayer.isHuman) otherPlayer.aiLevel = form.ailevel.value;
 
-  form.classList.add("visually-hidden")
-  }
+    form.classList.add("visually-hidden")
+
+    gameBoard.gameSet();
+    playerOne.resetPlayer();
+    playerTwo.resetPlayer();
+    _createBoard();
+    
+    if (!playerOne.isHuman) otherPlayer.pickCPU();
+    }
+
+    const toggleAIRadio = function() {
+      document.querySelector("#ai-form-label").classList.toggle("visually-hidden")
+    }
   
+  form.querySelector("#human-or-ai").addEventListener("change", toggleAIRadio)
   form.querySelector("#submit-btn").addEventListener("click", getForm)
   })();
   
@@ -83,25 +111,24 @@ const game = (function() {
       newCell.dataset.position = index;
       newCell.textContent = element;
       document.querySelector("#game-board").appendChild(newCell);
-      newCell.addEventListener("click", _pickHandler)
+      newCell.addEventListener("click", _pickHandler);
   })}
   
   const _pickHandler = function() {
     let whoPicked;
         if (playerOne.roundsPlayed === playerTwo.roundsPlayed) {
-          playerOne.pick();
+          if(!playerOne.pick()) return;
           whoPicked = playerOne;
         } else {
-          playerTwo.pick();
+          if (!playerTwo.pick()) return;
           whoPicked = playerTwo;
         }
 
     const otherPlayer = (whoPicked == playerOne) ? playerTwo : playerOne;
 
-    if (!otherPlayer.isHuman) { otherPlayer.pickCPU();
+    if (_checkEnd(whoPicked)) {
+      if (!otherPlayer.isHuman) {playerOne.pickCPU()}
     }
-
-    _checkEnd(whoPicked);
   };
   
   
@@ -122,10 +149,15 @@ const game = (function() {
     }
     )
 
+    if (didWin) return false;
+
 
     if (!gameBoard.gameState.includes(null)) {
       console.log("tie");
+      return false;
     }
+
+    return true;
   }
   
   
@@ -134,6 +166,8 @@ const game = (function() {
     playerOne.resetPlayer();
     playerTwo.resetPlayer();
     _createBoard();
+
+    if (!playerOne.isHuman) playerOne.pickCPU();
   })
 
   _createBoard();

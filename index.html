@@ -24,11 +24,20 @@
       </label>
 
       <label>Is Player Two Human or AI?
-      <select name="humanorai">
-        <option value=true>Human</option>
+      <select name="humanorai" id="human-or-ai">
         <option value=false>AI</option>
+        <option value=true>Human</option>
       </select>
+
+        <label id="ai-form-label" class="">AI strength : 
+          <input type="radio" name="ailevel" id="ai-easy" value="easy" checked=true class="visually-hidden radio-ai">
+          <label class="ai-label" for="ai-easy">Easy</label>
+          <input type="radio" name="ailevel" id="ai-unbeatable" value="unbeatable" class="visually-hidden radio-ai">
+          <label class="ai-label" for="ai-unbeatable">Unbeatable</label>
+        </label>
       </label>
+
+
       <label for="player-two-name">Player 2 name</label>
       <input type="text" id="player-two-name" name="name2" value="Just Joe">
       <input type="button" id="submit-btn" value="Submit">
