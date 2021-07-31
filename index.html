@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Leau's Tic-Tac-Toe</title>
+    <link href="styles/style.css" rel="stylesheet" type="text/css" />
+    <script src="scripts/script.js" defer></script>
+  </head>
+  <body>
+
+    <button id="reset-btn">Reset</button>
+    
+    <form>
+      <label for="player-one-name">Player 1 name</label>
+      <input type="text" name="name1" id="player-one-name" value="Jane Doe">
+
+      <label>Select your marker.
+      <input type="radio" name="marker" class="visually-hidden radio-marker" value="X" id="marker-x" checked=true>
+      <label class="marker-label" for="marker-x">X</label>
+     
+      <input type="radio" name="marker" class="visually-hidden radio-marker" value="O" id="marker-o">
+      <label class="marker-label" for="marker-o">O</label>
+      </label>
+
+      <label>Is Player Two Human or AI?
+      <select name="humanorai">
+        <option value=true>Human</option>
+        <option value=false>AI</option>
+      </select>
+      </label>
+      <label for="player-two-name">Player 2 name</label>
+      <input type="text" id="player-two-name" name="name2" value="Just Joe">
+      <input type="button" id="submit-btn" value="Submit">
+    </form>
+   
+    <div id="game-board">
+    </div>
+    
+  </body>
+</html>
