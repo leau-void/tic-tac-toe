@@ -9,13 +9,12 @@
   </head>
   <body>
 
-    <button id="reset-btn">Reset</button>
-    
     <form>
-      <label for="player-one-name">Player 1 name</label>
-      <input type="text" name="name1" id="player-one-name" value="Jane Doe">
+      <label for="player-one-name">Player 1 name :
+        <input type="text" name="name1" id="player-one-name" value="Jane Doe">
+      </label>
 
-      <label>Select your marker.
+      <label>Select your marker :
       <input type="radio" name="marker" class="visually-hidden radio-marker" value="X" id="marker-x" checked=true>
       <label class="marker-label" for="marker-x">X</label>
      
@@ -23,28 +22,32 @@
       <label class="marker-label" for="marker-o">O</label>
       </label>
 
-      <label>Is Player Two Human or AI?
+      <label>Is Player Two Human or AI?   
       <select name="humanorai" id="human-or-ai">
         <option value=false>AI</option>
         <option value=true>Human</option>
       </select>
-
-        <label id="ai-form-label" class="">AI strength : 
-          <input type="radio" name="ailevel" id="ai-easy" value="easy" class="visually-hidden radio-ai">
-          <label class="ai-label" for="ai-easy">Easy</label>
-          <input type="radio" name="ailevel" id="ai-unbeatable" value="unbeatable" checked=true class="visually-hidden radio-ai">
-          <label class="ai-label" for="ai-unbeatable">Unbeatable</label>
-        </label>
+      </label>
+      <label id="ai-form-label" class="">AI strength : 
+        <input type="radio" name="ailevel" id="ai-easy" value="easy" class="visually-hidden radio-ai">
+        <label class="ai-label" for="ai-easy">Easy</label>
+        <input type="radio" name="ailevel" id="ai-unbeatable" value="unbeatable" checked=true class="visually-hidden radio-ai">
+        <label class="ai-label" for="ai-unbeatable">Unbeatable</label>
       </label>
 
 
-      <label for="player-two-name">Player 2 name</label>
-      <input type="text" id="player-two-name" name="name2" value="Just Joe">
+      <label for="player-two-name" id="player-two-name" class="visually-hidden">Player 2 name :
+        <input type="text" id="player-two-name" name="name2" value="Just Joe">
+      </label>
       <input type="button" id="submit-btn" value="Submit">
     </form>
    
+    <div id="win-text" class="visually-hidden"></div>
+
     <div id="game-board">
     </div>
+
+    <button id="reset-btn">Reset</button>
     
   </body>
 </html>

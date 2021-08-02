@@ -1,9 +1,9 @@
 const gameBoard = (function () {
-  const gameState = [];
+  let gameState = [];
   
   const gameSet = function() {
     for (let i = 0; i < 9; i++) {
-    gameState[i] = null;
+      gameState[i] = null;
     }
   }
   
@@ -119,7 +119,6 @@ const PlayerFactory = (name, marker, isHuman, aiLevel) => {
         if (output) return output;
       }
 
-            
       let stateCopy = Array.from(state);
       let picksCopy = Array.from(picks);
       let picksOppCopy = Array.from(otherPlayer.picks);
@@ -154,8 +153,8 @@ const PlayerFactory = (name, marker, isHuman, aiLevel) => {
 
 const game = (function() {
 
-  const playerOne = PlayerFactory("One", "X", true);
-  const playerTwo = PlayerFactory("Two", "O", true);
+  const playerOne = PlayerFactory("Player One", "X", true);
+  const playerTwo = PlayerFactory("Player Two", "O", true);
   
   
   (function() {
@@ -171,6 +170,7 @@ const game = (function() {
   
     otherPlayer.isHuman = JSON.parse(form.humanorai.value);
     if (!otherPlayer.isHuman) otherPlayer.aiLevel = form.ailevel.value;
+    if (!otherPlayer.isHuman) otherPlayer.name = "The Computer"
 
     form.classList.add("visually-hidden")
 
@@ -178,12 +178,14 @@ const game = (function() {
     playerOne.resetPlayer();
     playerTwo.resetPlayer();
     _createBoard();
+    document.querySelector("#win-text").classList.add("visually-hidden");
     
     if (!playerOne.isHuman) playerOne.pickCPU();
     }
 
     const toggleAIRadio = function() {
-      document.querySelector("#ai-form-label").classList.toggle("visually-hidden")
+      document.querySelector("#ai-form-label").classList.toggle("visually-hidden");
+      document.querySelector("#player-two-name").classList.toggle("visually-hidden");
     }
   
   form.querySelector("#human-or-ai").addEventListener("change", toggleAIRadio)
@@ -233,7 +235,10 @@ const game = (function() {
           
           document.querySelectorAll(".cell").forEach(cell => cell.removeEventListener("click", _pickHandler))
           
-          console.log(`${whoPicked.name} wins!`);
+          let winText = document.querySelector("#win-text");
+          winText.textContent = `${whoPicked.name} wins!`;
+          winText.classList.remove("visually-hidden");
+
           return true;
         })(whoPicked);
       }
@@ -257,6 +262,7 @@ const game = (function() {
     playerOne.resetPlayer();
     playerTwo.resetPlayer();
     _createBoard();
+    document.querySelector("#win-text").classList.add("visually-hidden");
 
     if (!playerOne.isHuman) playerOne.pickCPU();
   })

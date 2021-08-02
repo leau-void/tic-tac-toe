@@ -2,17 +2,25 @@
   font-size: 100%;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background-color: royalblue;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  min-height: 600px;
+  height: 100%;
 }
 
 #game-board {
-  width: 500px;
-  height: 500px;
-  margin: 50px auto 0 auto;
-  background-color: black;
+  width: 401px;
+  height: 401px;
+  margin: 30px auto;
+  background-color: white;
   display: grid;
   grid: repeat(3, 1fr) / repeat(3, 1fr);
   gap: 10px;
@@ -28,24 +36,68 @@ body {
 .cell {
   width: 100%;
   height: 100%;
-  background-color: royalblue;
-  color: black;
+  background-color: black;
+  color: white;
   font-size: 100px;
   text-align: center;
 }
 
+#win-text {
+  width: 300px;
+  height: 10px;
+  margin: 0 auto;
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+}
+
 form {
-  width: 80%;
-  background-color: brown;
+  color: white;
+  width: fit-content;
+  min-height: 350px;
   display: flex;
   flex-direction: column;
-  margin: 5vh auto 0 auto;
-  padding: 10px;
+  justify-content: space-evenly;
+  padding: 0;
+  margin: 2vh auto 2vh auto;
+  border: 2px solid white;
+  border-radius: 20px;
+}
+
+input[type="text"] {
+  background-color: rgb(58, 58, 58);
+  color: white;
+  padding: 5px;
+  width: 80%;
+  margin: 0;
+  margin-top: 5px;
+  outline: none;
+  border: 2px solid transparent;
+  font-size: 1rem;
+}
+
+input[type="text"]:focus {
+  border: 2px solid white;
+}
+
+form label {
+  margin-left: 20px;
+  font-size: 1.2rem;
+}
+
+#human-or-ai {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  outline: none;
+  background-color: rgb(49, 49, 49);
+  color: white;
+  border: 1px solid white;
+  font-size: 1rem;
 }
 
 .marker-label {
   color: white;
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding: 5px;
   border: 2px solid transparent;
 }
@@ -56,7 +108,7 @@ form {
 
 .ai-label {
   color: white;
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding: 5px;
   border: 2px solid transparent;
 }
@@ -69,6 +121,33 @@ form {
   display: initial;
 }
 
+#submit-btn {
+  width: fit-content;
+  margin: 0 auto;
+  background-color: transparent;
+  outline: none;
+  border: 2px solid rgb(48, 48, 48);
+  color: white;
+  font-size: 1rem;
+}
+
+#submit-btn:hover {
+  border: 2px solid white;
+  background-color: rgb(46, 46, 46);
+}
+
+#reset-btn {
+  margin: 0 auto;
+  width: fit-content;
+  height: 3%;
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  font-size: 1rem;
+}
+
+
+
 #ai-form-label.visually-hidden {
   display: none;
 }
@@ -76,9 +155,6 @@ form {
 .visually-hidden {
   display: none;
 }
-
-
-
 
 * {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -88,4 +164,33 @@ form {
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+}
+
+@media (orientation: landscape) {
+  body {
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+  }
+  #game-board {
+    width: 500px;
+    height: 500px;
+  }
+  #form-div {
+    min-height: 500px;
+    width: 40%;
+    margin: auto;
+  }
+  form {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: auto;
+    border: 2px solid white;
+    border-radius: 20px;
+  }
+  #reset-btn {
+    order: 1;
+  }
 }
