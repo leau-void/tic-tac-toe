@@ -185,7 +185,7 @@ const game = (function() {
 
     const toggleAIRadio = function() {
       document.querySelector("#ai-form-label").classList.toggle("visually-hidden");
-      document.querySelector("#player-two-name").classList.toggle("visually-hidden");
+      document.querySelector("#player-two-label").classList.toggle("visually-hidden");
     }
   
   form.querySelector("#human-or-ai").addEventListener("change", toggleAIRadio)

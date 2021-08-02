@@ -16,10 +16,18 @@ body {
   height: 100%;
 }
 
+#board-text-reset {
+  display: flex;
+  flex-direction: column;
+  min-width: 50%;
+  margin: 0 auto;
+  padding-bottom: 10px;
+}
+
 #game-board {
   width: 401px;
   height: 401px;
-  margin: 30px auto;
+  margin: 50px auto;
   background-color: white;
   display: grid;
   grid: repeat(3, 1fr) / repeat(3, 1fr);
@@ -46,6 +54,7 @@ body {
   width: 300px;
   height: 10px;
   margin: 0 auto;
+  margin-bottom: -10px;
   color: white;
   text-align: center;
   font-size: 2rem;
@@ -53,7 +62,7 @@ body {
 
 form {
   color: white;
-  width: fit-content;
+  min-width: 35%;
   min-height: 350px;
   display: flex;
   flex-direction: column;
@@ -117,13 +126,23 @@ form label {
   border : 2px solid white;
 }
 
+#player-two-label {
+
+height: fit-content;
+height: 59px;
+}
+
+
 #ai-form-label {
   display: initial;
+  height: 59px;
+  line-height: 59px;
+
 }
 
 #submit-btn {
   width: fit-content;
-  margin: 0 auto;
+  margin: 10px auto 0 auto;
   background-color: transparent;
   outline: none;
   border: 2px solid rgb(48, 48, 48);
@@ -139,11 +158,12 @@ form label {
 #reset-btn {
   margin: 0 auto;
   width: fit-content;
-  height: 3%;
+  min-height: fit-content;
   background-color: transparent;
   border: 2px solid white;
   color: white;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  padding: 5px;
 }
 
 
@@ -170,6 +190,7 @@ form label {
   body {
     flex-direction: row;
     align-items: center;
+    justify-content: space-evenly;
     height: 100%;
   }
   #game-board {
