@@ -249,7 +249,9 @@ const game = (function() {
 
 
     if (!gameBoard.gameState.includes(null)) {
-      console.log("tie");
+      let winText = document.querySelector("#win-text");
+      winText.textContent = `This is a tie!`;
+      winText.classList.remove("visually-hidden");
       return false;
     }
 
